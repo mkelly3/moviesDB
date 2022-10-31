@@ -1,8 +1,13 @@
+
+const db = require('../database');
 const moviesReviews = require('express').Router();
-const { readFromFile, readAndAppend } = require('../helpers/fsUtils');
 
 moviesReviews.get('/', (req, res) => {
-  readFromFile('./db/schema.sql').then((data) => res.json(JSON.parse(data)));
+  db.query(`SELECT movies.name AS name, review as review
+  FROM reviews
+  JOIN movies on movies.id = reviews.movies`,function(err, results){
+    console.table(results)
+  })
 });
 
 module.exports = moviesReviews;

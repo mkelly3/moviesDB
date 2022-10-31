@@ -1,6 +1,6 @@
 const express = require('express');
 // const addMovies = require('./add-movie');
-// const movieReviews = require('./movie-reviews');
+const movieReviews = require('./movie-reviews');
 const movies = require('./movies');
 // const review = require('./review');
 const app = express();
@@ -8,7 +8,7 @@ const app = express();
 
 
 app.use('/movies', movies);
-// app.use('/movieReviews', movieReviews);
+app.use('/movieReviews', movieReviews);
 // app.use('/review', review);
 // app.use('/addMovies', addMovies);
 
