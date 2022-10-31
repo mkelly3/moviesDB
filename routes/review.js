@@ -1,24 +1,11 @@
 const reviews = require('express').Router();
-const { readFromFile, readAndAppend } = require('../helpers/fsUtils');
+const db = require('../database');
 
-reviews.get('/', (req, res) => {
-  readFromFile('./db/movies.db').then((data) => res.json(JSON.parse(data)));
-});
-
-reviews.post('/', (req, res) => {
-  console.log(req.body);
-
-
-  if (req.body) {
-    const newTip = {
-    
-    };
-
-    readAndAppend(newMovie, './db/schema.sql');
-    res.json(`Review added successfully 🚀`);
-  } else {
-    res.error('Error in adding review');
-  }
+reviews.put('/:id', function (req, res) {
+  db.query(`UPDATE review WHERE movies = $id`, function (err, results) {
+    console.table(results);
+  });
+ 
 });
 
 module.exports = reviews;

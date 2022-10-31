@@ -1,24 +1,26 @@
 const addMovies = require('express').Router();
-const { readFromFile, readAndAppend } = require('../helpers/fsUtils');
-
-addMovies.get('/', (req, res) => {
-  readFromFile('./db/schema.sql').then((data) => res.json(JSON.parse(data)));
-});
+const db = require('../database');
 
 addMovies.post('/', (req, res) => {
   console.log(req.body);
 
+  const { name } = req.body;
+  console.log(name)
 
   if (req.body) {
-    const newTip = {
-    
+    const newMovie = {
+      name
     };
+    insertToDb(newMovie)
+}
+}
+);
 
-    readAndAppend(newMovie, './db/schema.sql');
-    res.json(`Movie added successfully 🚀`);
-  } else {
-    res.error('Error in adding movie');
-  }
-});
+function insertToDb(movie) {
+  db.query("INSERT INTO movies (movie_name) VALUES (?)", [movie.movie_name], function(err, res) {
+        if (err) throw err;
+        console.log(res);
+      });
+}
 
 module.exports = addMovies;
