@@ -1,17 +1,18 @@
-const addMovies = require('express').Router();
+const addMovie = require('express').Router();
 const db = require('../database');
 
-addMovies.post('/', (req, res) => {
+addMovie.post('/', (req, res) => {
   console.log(req.body);
 
-  const { name } = req.body;
-  console.log(name)
+  const { movie_name } = req.body;
+  console.log(movie_name)
 
   if (req.body) {
     const newMovie = {
-      name
+      movie_name
     };
     insertToDb(newMovie)
+    res.json("Movie added Successfully")
 }
 }
 );
@@ -23,4 +24,4 @@ function insertToDb(movie) {
       });
 }
 
-module.exports = addMovies;
+module.exports = addMovie;

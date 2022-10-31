@@ -7,6 +7,7 @@ moviesReviews.get('/', (req, res) => {
   FROM reviews
   JOIN movies on movies.id = reviews.movies`,function(err, results){
     console.table(results)
+    res.json(results)
   })
 });
 
