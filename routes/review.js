@@ -14,7 +14,7 @@ reviews.post('/', (req, res) => {
     
     };
 
-    readAndAppend(newMovie, './db/movies.db');
+    readAndAppend(newMovie, './db/schema.sql');
     res.json(`Review added successfully 🚀`);
   } else {
     res.error('Error in adding review');

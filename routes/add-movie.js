@@ -2,7 +2,7 @@ const addMovies = require('express').Router();
 const { readFromFile, readAndAppend } = require('../helpers/fsUtils');
 
 addMovies.get('/', (req, res) => {
-  readFromFile('./db/movies.db').then((data) => res.json(JSON.parse(data)));
+  readFromFile('./db/schema.sql').then((data) => res.json(JSON.parse(data)));
 });
 
 addMovies.post('/', (req, res) => {
@@ -14,7 +14,7 @@ addMovies.post('/', (req, res) => {
     
     };
 
-    readAndAppend(newMovie, './db/movies.db');
+    readAndAppend(newMovie, './db/schema.sql');
     res.json(`Movie added successfully 🚀`);
   } else {
     res.error('Error in adding movie');

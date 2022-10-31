@@ -1,8 +1,11 @@
 const movies = require('express').Router();
-const { readFromFile, readAndAppend } = require('../helpers/fsUtils');
+const db = require('../database');
+const mysql = require("mysql2");
 
 movies.get('/', (req, res) => {
-  readFromFile('./db/movies.db').then((data) => res.json(JSON.parse(data)));
+  db.query('Select * from movies',function (err, results) {
+    console.table(results);
+  });
 });
 
 module.exports = movies;
